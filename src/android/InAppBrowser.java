@@ -1228,7 +1228,7 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }else if(url.startsWith("intent:")) {
                 try {
-                            url = url.replace("intent://", "bank100000000007://");
+                           // url = url.replace("intent://", "bank100000000007://");
                             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                                 if (intent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(intent);
