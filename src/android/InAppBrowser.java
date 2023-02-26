@@ -1164,7 +1164,7 @@ public class InAppBrowser extends CordovaPlugin {
             LOG.e(LOG_TAG, "TRYING STUFF = " + url );
 
             if(url.startsWith("intent://")){
-                cordova.inappbrowser.open(url.replace("intent://", "https://"), "_system");
+                cordova.InAppBrowser.open(url.replace("intent://", "https://"), "_system");
                 return false;
             }
 
