@@ -1202,7 +1202,7 @@ public class InAppBrowser extends CordovaPlugin {
                 } catch (android.content.ActivityNotFoundException e) {
                     LOG.e(LOG_TAG, "Error dialing " + url + ": " + e.toString());
                 }
-            } else if (url.startsWith("geo:") || url.startsWith(WebView.SCHEME_MAILTO) || url.startsWith("market:") || url.startsWith("intent:")) {
+            } else if (url.startsWith("geo:") || url.startsWith(WebView.SCHEME_MAILTO) || url.startsWith("market:")) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
@@ -1211,6 +1211,24 @@ public class InAppBrowser extends CordovaPlugin {
                 } catch (android.content.ActivityNotFoundException e) {
                     LOG.e(LOG_TAG, "Error with " + url + ": " + e.toString());
                 }
+            }else if(url.startsWith("intent:")){
+                Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                                        if (intent.resolveActivity(packageManager) != null) {
+                                                cordova.getActivity().startActivity(intent);
+                                                return true;
+                                        }
+                                        // Try to open the fallback URL
+                                        String fallbackUrl = intent.getStringExtra("browser_fallback_url");
+                                        if (fallbackUrl != null) {
+                                                webView.loadUrl(fallbackUrl);
+                                                return true;
+                                        }
+                                        // Head to the Play Store and look for an app.
+                                        Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + intent.getPackage()));
+                                        if (marketIntent.resolveActivity(packageManager) != null) {
+                                                cordova.getActivity().startActivity(marketIntent);
+                                                return true;
+                                        }
             }
             // If sms:5551212?body=This is the message
             else if (url.startsWith("sms:")) {
