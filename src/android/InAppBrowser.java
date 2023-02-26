@@ -1234,7 +1234,7 @@ public class InAppBrowser extends CordovaPlugin {
                                     cordova.getActivity().startActivity(intent);
                                      return true;
                               //  }
-                                String fallbackUrl = intent.getStringExtra("browser_fallback_url");
+                                /*String fallbackUrl = intent.getStringExtra("browser_fallback_url");
 
                                 LOG.e(LOG_TAG, "FALLBACK = " + fallbackUrl );
                                 if (fallbackUrl != null) {
@@ -1245,7 +1245,7 @@ public class InAppBrowser extends CordovaPlugin {
                                 if (marketIntent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(marketIntent);
                                     return true;
-                                }
+                                }*/
                 } catch (Exception e) {
                     LOG.e(LOG_TAG, "Failed to handle INTENT: " + e.toString() );
                 }
