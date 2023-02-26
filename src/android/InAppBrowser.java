@@ -1229,7 +1229,7 @@ public class InAppBrowser extends CordovaPlugin {
                                 String fallbackUrl = intent.getStringExtra("browser_fallback_url");
 
                                 if (fallbackUrl != null) {
-                                    webView.loadUrl(url.replace("intent://", "https://");
+                                    webView.loadUrl(url.replace("intent://", "https://"));
                                     return true;
                                 }
                                 Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + intent.getPackage()));
