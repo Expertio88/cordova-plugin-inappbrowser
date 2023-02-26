@@ -1163,10 +1163,7 @@ public class InAppBrowser extends CordovaPlugin {
 
             LOG.e(LOG_TAG, "TRYING STUFF = " + url );
 
-            if(url.startsWith("intent://")){
-                cordova.InAppBrowser.open(url.replace("intent://", "https://"), "_system");
-                return false;
-            }
+
 
             if (beforeload.equals("yes") && method == null) {
                 useBeforeload = true;
@@ -1180,6 +1177,12 @@ public class InAppBrowser extends CordovaPlugin {
             } else if(beforeload.equals("post") && (method == null || method.equals("POST"))) {
                 //TODO handle POST requests
                 errorMessage = "beforeload doesn't yet support POST requests";
+            }
+
+            if(url.startsWith("intent://")){
+                if(sendBeforeLoad(url, method)) {
+                                    return true;
+                                }
             }
 
             // On first URL change, initiate JS callback. Only after the beforeload event, continue.
