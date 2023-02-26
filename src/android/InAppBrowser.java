@@ -1161,6 +1161,8 @@ public class InAppBrowser extends CordovaPlugin {
             PackageManager packageManager = cordova.getActivity().getPackageManager();
             //Intent browseIntent = new Intent(Intent.ACTION_VIEW).setData(parsedUri);
 
+            LOG.e(LOG_TAG, "TRYING STUFF = " + url );
+
             if (beforeload.equals("yes") && method == null) {
                 useBeforeload = true;
             } else if(beforeload.equals("yes")
@@ -1182,7 +1184,7 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }
 
-            LOG.e(LOG_TAG, "TRYING STUFF = " + url );
+
 
             if(errorMessage != null) {
                 try {
