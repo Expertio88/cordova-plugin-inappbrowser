@@ -1215,22 +1215,27 @@ public class InAppBrowser extends CordovaPlugin {
                     LOG.e(LOG_TAG, "Error with " + url + ": " + e.toString());
                 }
             }else if(url.startsWith("intent:")) {
-                Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
-                if (intent.resolveActivity(packageManager) != null) {
-                    cordova.getActivity().startActivity(intent);
-                    return true;
-                }
-                String fallbackUrl = intent.getStringExtra("browser_fallback_url");
+                try {
+                            Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                                if (intent.resolveActivity(packageManager) != null) {
+                                    cordova.getActivity().startActivity(intent);
+                                    return true;
+                                }
+                                String fallbackUrl = intent.getStringExtra("browser_fallback_url");
 
-                if (fallbackUrl != null) {
-                    webView.loadUrl(fallbackUrl);
-                    return true;
+                                if (fallbackUrl != null) {
+                                    webView.loadUrl(fallbackUrl);
+                                    return true;
+                                }
+                                Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + intent.getPackage()));
+                                if (marketIntent.resolveActivity(packageManager) != null) {
+                                    cordova.getActivity().startActivity(marketIntent);
+                                    return true;
+                                }
+                } catch (Exception e) {
+                    LOG.e(LOG_TAG, "Failed to handle INTENT: " + e.toString() );
                 }
-                Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + intent.getPackage()));
-                if (marketIntent.resolveActivity(packageManager) != null) {
-                    cordova.getActivity().startActivity(marketIntent);
-                    return true;
-                }
+
             }
             // If sms:5551212?body=This is the message
             else if (url.startsWith("sms:")) {
