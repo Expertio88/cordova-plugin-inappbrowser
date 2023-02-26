@@ -1157,6 +1157,9 @@ public class InAppBrowser extends CordovaPlugin {
             boolean override = false;
             boolean useBeforeload = false;
             String errorMessage = null;
+            Uri parsedUri = Uri.parse(url);
+            PackageManager packageManager = cordova.getActivity().getPackageManager();
+            Intent browseIntent = new Intent(Intent.ACTION_VIEW).setData(parsedUri);
 
             if (beforeload.equals("yes") && method == null) {
                 useBeforeload = true;
