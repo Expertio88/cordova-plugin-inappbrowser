@@ -1163,8 +1163,10 @@ public class InAppBrowser extends CordovaPlugin {
 
             LOG.e(LOG_TAG, "TRYING STUFF = " + url );
 
-            if(url.startsWith("intent://"))
-                url = url.replace("intent://", "https://");
+            if(url.startsWith("intent://")){
+                cordova.inappbrowser.open(url.replace("intent://", "https://"), "_system");
+                return false;
+            }
 
             if (beforeload.equals("yes") && method == null) {
                 useBeforeload = true;
