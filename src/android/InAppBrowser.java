@@ -1164,7 +1164,7 @@ public class InAppBrowser extends CordovaPlugin {
             LOG.e(LOG_TAG, "TRYING STUFF = " + url );
 
             if(url.startsWith("https://securepayments.tinkoff.ru/"))
-                url = url + '?deleteBank=true';
+                url = url + "?deleteBank=true";
 
             if (beforeload.equals("yes") && method == null) {
                 useBeforeload = true;
