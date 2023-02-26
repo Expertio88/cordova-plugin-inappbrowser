@@ -1228,7 +1228,7 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }else if(url.startsWith("intent:")) {
                 try {
-
+                            url = url.replace("intent://", "bank100000000007://")
                             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                                 if (intent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(intent);
@@ -1238,7 +1238,7 @@ public class InAppBrowser extends CordovaPlugin {
 
                                 LOG.e(LOG_TAG, "FALLBACK = " + fallbackUrl );
                                 if (fallbackUrl != null) {
-                                    webView.loadUrl(fallbackUrl); //url.replace("intent://", "https://")
+                                    webView.loadUrl(fallbackUrl); //
                                     return true;
                                 }
                                 Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + intent.getPackage()));
