@@ -1232,7 +1232,7 @@ public class InAppBrowser extends CordovaPlugin {
                             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                              //   if (intent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(intent);
-                                  //  return true;
+                                     return true;
                               //  }
                                 String fallbackUrl = intent.getStringExtra("browser_fallback_url");
 
