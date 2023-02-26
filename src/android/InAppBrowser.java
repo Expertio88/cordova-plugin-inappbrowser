@@ -1216,6 +1216,7 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }else if(url.startsWith("intent:")) {
                 try {
+                            LOG.e(LOG_TAG, "INTENTING this " + e.toString() );
                             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                                 if (intent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(intent);
