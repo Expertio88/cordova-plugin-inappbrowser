@@ -1182,6 +1182,8 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }
 
+            LOG.e(LOG_TAG, "TRYING STUFF = " + url );
+
             if(errorMessage != null) {
                 try {
                     LOG.e(LOG_TAG, errorMessage);
@@ -1216,7 +1218,7 @@ public class InAppBrowser extends CordovaPlugin {
                 }
             }else if(url.startsWith("intent:")) {
                 try {
-                            LOG.e(LOG_TAG, "INTENTING this " + url );
+
                             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                                 if (intent.resolveActivity(packageManager) != null) {
                                     cordova.getActivity().startActivity(intent);
