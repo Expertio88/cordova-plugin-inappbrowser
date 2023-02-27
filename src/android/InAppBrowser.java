@@ -1179,11 +1179,7 @@ public class InAppBrowser extends CordovaPlugin {
                 errorMessage = "beforeload doesn't yet support POST requests";
             }
 
-           /* if(url.startsWith("intent://")){
-                if(sendBeforeLoad(url, method)) {
-                                    return true;
-                                }
-            }*/
+
 
             // On first URL change, initiate JS callback. Only after the beforeload event, continue.
             if (useBeforeload && this.waitForBeforeload) {
